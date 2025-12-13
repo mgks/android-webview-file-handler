@@ -49,6 +49,45 @@ afterEvaluate {
                 groupId = 'dev.mgks.swv'
                 artifactId = 'filehandler'
                 version = '1.0.0'
+
+                pom {
+                    name = 'Android WebView File Handler'
+                    description = 'A lightweight library to handle file uploads in Android WebViews.'
+                    url = 'https://github.com/mgks/android-webview-file-handler'
+
+                    licenses {
+                        license {
+                            name = 'MIT License'
+                            url = 'http://opensource.org/licenses/MIT'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'mgks'
+                            name = 'Ghazi Khan'
+                            email = 'hello@mgks.dev'
+                        }
+                    }
+                    scm {
+                        connection = 'scm:git:github.com/mgks/android-webview-file-handler.git'
+                        developerConnection = 'scm:git:ssh://github.com/mgks/android-webview-file-handler.git'
+                        url = 'https://github.com/mgks/android-webview-file-handler/tree/main'
+                    }
+                }
+            }
+        }
+
+        repositories {
+            if (System.getenv("GITHUB_ACTOR") != null) {
+                maven {
+                    name = "GitHubPackages"
+                    url = uri("https://maven.pkg.github.com/mgks/android-webview-file-handler")
+
+                    credentials {
+                        username = System.getenv("GITHUB_ACTOR")
+                        password = System.getenv("GITHUB_TOKEN")
+                    }
+                }
             }
         }
     }
