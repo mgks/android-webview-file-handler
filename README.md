@@ -8,10 +8,15 @@ A lightweight, robust library to handle file uploads (`<input type="file">`) ins
 Extracted from the core of **[Android Smart WebView](https://github.com/mgks/Android-SmartWebView)**.
 
 ## Features
+
 ✅ **Zero Boilerplate:** Handles `WebChromeClient` logic with one line.
+
 ✅ **Camera Support:** Automatically offers Camera options in the chooser.
+
 ✅ **Multiple Files:** Supports `multiple` attribute in HTML inputs.
+
 ✅ **Secure:** Uses modern `FileProvider` to avoid `FileUriExposedException`.
+
 ✅ **Kotlin & Java:** Written in Kotlin but 100% Java-friendly.
 
 ## Installation
