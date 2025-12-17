@@ -1,47 +1,37 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
 }
 
+// Read versions from gradle.properties
+def compileSdkVer = project.ANDROID_COMPILE_SDK.toInteger()
+def minSdkVer = project.ANDROID_MIN_SDK.toInteger()
+def targetSdkVer = project.ANDROID_TARGET_SDK.toInteger()
+def javaVer = JavaVersion.toVersion(project.JAVA_VERSION)
+
 android {
-    namespace 'dev.mgks.swv.sample'
-    compileSdk {
-        version = release(36)
-    }
+    namespace "dev.mgks.swv.sample"
+    compileSdk compileSdkVer
 
     defaultConfig {
         applicationId "dev.mgks.swv.sample"
-        minSdk 24
-        targetSdk 36
+        minSdk minSdkVer
+        targetSdk targetSdkVer
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility javaVer
+        targetCompatibility javaVer
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = javaVer.toString()
     }
 }
 
 dependencies {
-    implementation project(':filehandler')
-
-    implementation libs.androidx.appcompat.v171
-    implementation libs.androidx.core.ktx
-    implementation libs.androidx.appcompat
-    implementation libs.material
-    testImplementation libs.junit
-    androidTestImplementation libs.androidx.junit
-    androidTestImplementation libs.androidx.espresso.core
+    implementation project(':library')
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
 }

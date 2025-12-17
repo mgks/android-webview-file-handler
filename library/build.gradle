@@ -1,0 +1,84 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
+}
+
+// Read versions from gradle.properties
+def compileSdkVer = project.ANDROID_COMPILE_SDK.toInteger()
+def minSdkVer = project.ANDROID_MIN_SDK.toInteger()
+def javaVer = JavaVersion.toVersion(project.JAVA_VERSION)
+
+android {
+    namespace "${LIB_GROUP_ID}.${LIB_ARTIFACT_ID.replace('-', '.')}"
+    compileSdk compileSdkVer
+
+    defaultConfig {
+        minSdk minSdkVer
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    // Modern Java 17 Support
+    compileOptions {
+        sourceCompatibility javaVer
+        targetCompatibility javaVer
+    }
+    kotlinOptions {
+        jvmTarget = javaVer.toString()
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+}
+
+// Publishing Block (Standardized)
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = LIB_GROUP_ID
+                artifactId = LIB_ARTIFACT_ID
+                version = LIB_VERSION
+
+                pom {
+                    name = LIB_NAME
+                    description = LIB_DESCRIPTION
+                    url = LIB_URL
+                    licenses {
+                        license {
+                            name = 'MIT License'
+                            url = 'http://opensource.org/licenses/MIT'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'mgks'
+                            name = 'Ghazi Khan'
+                            email = 'hello@mgks.dev'
+                        }
+                    }
+                    scm {
+                        connection = "scm:git:${LIB_URL}.git"
+                        developerConnection = "scm:git:ssh://${LIB_URL}.git"
+                        url = LIB_URL
+                    }
+                }
+            }
+        }
+        repositories {
+            if (System.getenv("GITHUB_ACTOR") != null) {
+                maven {
+                    name = "GitHubPackages"
+                    url = uri("https://maven.pkg.github.com/${System.getenv("GITHUB_REPOSITORY")}")
+                    credentials {
+                        username = System.getenv("GITHUB_ACTOR")
+                        password = System.getenv("GITHUB_TOKEN")
+                    }
+                }
+            }
+        }
+    }
+}
