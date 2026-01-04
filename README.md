@@ -9,15 +9,11 @@ Extracted from the core of **[Android Smart WebView](https://github.com/mgks/And
 
 ## Features
 
-✅ **Zero Boilerplate:** Handles `WebChromeClient` logic with one line.
-
-✅ **Camera Support:** Automatically offers Camera options in the chooser.
-
-✅ **Multiple Files:** Supports `multiple` attribute in HTML inputs.
-
-✅ **Secure:** Uses modern `FileProvider` to avoid `FileUriExposedException`.
-
-✅ **Kotlin & Java:** Written in Kotlin but 100% Java-friendly.
+- **Zero Boilerplate:** Handles `WebChromeClient` logic with one line.
+- **Camera Support:** Automatically offers Camera options in the chooser.
+- **Multiple Files:** Supports `multiple` attribute in HTML inputs.
+- **Secure:** Uses modern `FileProvider` to avoid `FileUriExposedException`.
+- **Kotlin & Java:** Written in Kotlin but 100% Java-friendly.
 
 ## Installation
 
@@ -150,4 +146,8 @@ val fileChooser = SwvFileChooser(this, config)
 ```
 
 ## License
-MIT License
+MIT
+
+> **{ github.com/mgks }**
+> 
+> ![Website Badge](https://img.shields.io/badge/Visit-mgks.dev-blue?style=flat&link=https%3A%2F%2Fmgks.dev) ![Sponsor Badge](https://img.shields.io/badge/%20%20Become%20a%20Sponsor%20%20-red?style=flat&logo=github&link=https%3A%2F%2Fgithub.com%2Fsponsors%2Fmgks)
